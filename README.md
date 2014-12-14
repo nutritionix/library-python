@@ -81,3 +81,9 @@ ingredients = """
 """
 nutritionix.natural(q=ingredients, gram_weight=20)
 ```
+
+#### Autocomplete
+```py
+#allow users the convenience of "as you type" suggestions.
+nutritionix.autocomplete(q='greek y')
+```
