@@ -64,5 +64,5 @@ can contain all the perameters the API accepts in the `GET /v2/search/brands` en
 
 type: (1:restaurant, 2:cpg, 3:usda/nutritionix) defaults to undefined
 """
-nutritionix.brand_search('just salad', limit=10, offset=0, type=1)
+nutritionix.brand_search(q='just salad', limit=10, offset=0, type=1)
 ```
