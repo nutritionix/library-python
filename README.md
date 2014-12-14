@@ -44,18 +44,6 @@ nutritionix.search(q='salad', limit=10, offset=0, search_nutrient='calories')
 nutritionix.search('salad', limit=10, offset=0, search_nutrient='calories')
 ```
 
-#### Get Item By `id` or search `resource_id`
-```py
-# this will locate an item by its id or by a search `resource_id`
-nutritionix.item(id='zgcjnYV')
-```
-
-#### Get Brand By `id`
-```py
-# this will locate a brand by its id
-nutritionix.brand(id='bV')
-```
-
 #### Brand Search
 ```py
 """
@@ -65,4 +53,16 @@ can contain all the perameters the API accepts in the `GET /v2/search/brands` en
 type: (1:restaurant, 2:cpg, 3:usda/nutritionix) defaults to undefined
 """
 nutritionix.brand_search(q='just salad', limit=10, offset=0, type=1)
+```
+
+#### Get Brand By `id`
+```py
+# this will locate a brand by its id
+nutritionix.brand(id='bV')
+```
+
+#### Get Item By `id` or search `resource_id`
+```py
+# this will locate an item by its id or by a search `resource_id`
+nutritionix.item(id='zgcjnYV')
 ```
