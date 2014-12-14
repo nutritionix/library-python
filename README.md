@@ -32,7 +32,7 @@ nutritionix.search({
     'limit': 10,
     'offset': 0,
     # controls the basic nutrient returned in search
-    'search_nutrient: 'calories'
+    'search_nutrient': 'calories'
 })
 ```
 ###### or
