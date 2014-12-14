@@ -19,7 +19,7 @@ nutritionix = NutritionixClient(
 ```
 
 ### Usage
-You can execute all methods in 3 ways.
+You can execute the API methods in 3 ways.
 ####  Standard Search
 ```py
 """
