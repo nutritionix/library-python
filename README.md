@@ -41,7 +41,7 @@ nutritionix.search(q='salad', limit=10, offset=0, search_nutrient='calories')
 ```
 ###### also
 ```py
-nutritionix.search('salad', limit=10, offset=0)
+nutritionix.search('salad', limit=10, offset=0, search_nutrient='calories')
 ```
 
 #### Get Item By `id` or search `resource_id`
