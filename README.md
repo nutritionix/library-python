@@ -47,5 +47,11 @@ nutritionix.search('salad', limit=10, offset=0)
 #### Get Item By `id` or search `resource_id`
 ```py
 # this will locate an item by its id or by a search `resource_id`
-nutritionix.item(id='bV')
+nutritionix.item(id='zgcjnYV')
+```
+
+#### Get Brand By `id`
+```py
+# this will locate a brand by its id
+nutritionix.brand(id='bV')
 ```
