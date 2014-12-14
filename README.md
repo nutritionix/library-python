@@ -11,7 +11,7 @@ pip install nutritionix
 # import inside your project
 from nutritionix import NutritionixClient
  
- nutritionix = NutritionixClient(
+nutritionix = NutritionixClient(
     application_id='YOUR_APP_ID',
     api_key='YOUR_API_KEY',
     # debug=True, # defaults to False
