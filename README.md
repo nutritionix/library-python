@@ -19,18 +19,29 @@ from nutritionix import NutritionixClient
 ```
 
 ### Usage
-
-#### Get Item By `id` or search `resource_id`
-You can execute methods in 3 ways
+You can execute all methods in 3 ways.
+####  Standard Search
 ```py
-# this will locate an item by its id or by a search `resource_id`
-nutritionix.item({'id': 'bV'})
+"""
+This will perform a search. The object passed into this function
+can contain all the perameters the API accepts in the `POST /v2/search` endpoint
+"""
+nutritionix.search({
+  q:'salad',
+  # use these for paging
+  limit: 10,
+  offset: 0,
+  # controls the basic nutrient returned in search
+  search_nutrient: 'calories'
+})
 ```
 ###### or
-```py
-nutritionix.item(id='bV')
-```
+nutritionix.search(q='salad', limit=10, offset=0, search_nutrient='calories')
 ###### also
+nutritionix.search('salad', limit=10, offset=0)
+
+#### Get Item By `id` or search `resource_id`
 ```py
-nutritionix.item('bV')
+# this will locate an item by its id or by a search `resource_id`
+nutritionix.item(id='bV')
 ```
