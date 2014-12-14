@@ -66,3 +66,18 @@ nutritionix.brand(id='bV')
 # this will locate an item by its id or by a search `resource_id`
 nutritionix.item(id='zgcjnYV')
 ```
+
+#### Natural
+```py
+"""
+The natural endpoint allows you to translate plane text into a full spectrum analysis.
+gram_weight: An {Integer} that will be used as a multiplier when calculating `total.nutrients`
+"""
+
+ingredients = """
+1 tbsp sugar
+16 fl oz water
+1/2 lemon
+"""
+nutritionix.natural(q=ingredients, gram_weight=20)
+```
