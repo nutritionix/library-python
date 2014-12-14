@@ -11,7 +11,7 @@ pip install nutritionix
 # import inside your project
 from nutritionix import NutritionixClient
  
- nutritionix = NutritionixClient(
+nutritionix = NutritionixClient(
     application_id='YOUR_APP_ID',
     api_key='YOUR_API_KEY',
     # debug=True, # defaults to False
@@ -32,7 +32,7 @@ nutritionix.search({
     'limit': 10,
     'offset': 0,
     # controls the basic nutrient returned in search
-    'search_nutrient: 'calories'
+    'search_nutrient': 'calories'
 })
 ```
 ###### or
@@ -41,19 +41,7 @@ nutritionix.search(q='salad', limit=10, offset=0, search_nutrient='calories')
 ```
 ###### also
 ```py
-nutritionix.search('salad', limit=10, offset=0)
-```
-
-#### Get Item By `id` or search `resource_id`
-```py
-# this will locate an item by its id or by a search `resource_id`
-nutritionix.item(id='zgcjnYV')
-```
-
-#### Get Brand By `id`
-```py
-# this will locate a brand by its id
-nutritionix.brand(id='bV')
+nutritionix.search('salad', limit=10, offset=0, search_nutrient='calories')
 ```
 
 #### Brand Search
@@ -64,5 +52,32 @@ can contain all the perameters the API accepts in the `GET /v2/search/brands` en
 
 type: (1:restaurant, 2:cpg, 3:usda/nutritionix) defaults to undefined
 """
-nutritionix.brand_search('just salad', limit=10, offset=0, type=1)
+nutritionix.brand_search(q='just salad', limit=10, offset=0, type=1)
+```
+
+#### Get Brand By `id`
+```py
+# this will locate a brand by its id
+nutritionix.brand(id='bV')
+```
+
+#### Get Item By `id` or search `resource_id`
+```py
+# this will locate an item by its id or by a search `resource_id`
+nutritionix.item(id='zgcjnYV')
+```
+
+#### Natural
+```py
+"""
+The natural endpoint allows you to translate plane text into a full spectrum analysis.
+gram_weight: An {Integer} that will be used as a multiplier when calculating `total.nutrients`
+"""
+
+ingredients = """
+1 tbsp sugar
+16 fl oz water
+1/2 lemon
+"""
+nutritionix.natural(q=ingredients, gram_weight=20)
 ```
