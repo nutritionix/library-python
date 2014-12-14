@@ -55,3 +55,14 @@ nutritionix.item(id='zgcjnYV')
 # this will locate a brand by its id
 nutritionix.brand(id='bV')
 ```
+
+#### Brand Search
+```py
+"""
+This will perform a search. The object passed into this function
+can contain all the perameters the API accepts in the `GET /v2/search/brands` endpoint
+
+type: (1:restaurant, 2:cpg, 3:usda/nutritionix) defaults to undefined
+"""
+nutritionix.brand_search('just salad', 'limit': 10, 'offset': 0, 'type': 1)
+```
