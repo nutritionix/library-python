@@ -31,27 +31,33 @@ class NutritionixClient:
         """ Bootstrap, execute and return request object,
                 default method: GET
         """
+
+        # Verify params
+        if params.get('limit') != None and params.get('offset') == None:
+            raise Exception('Missing offset',
+                            'limit and offset are required for paginiation.')
+
+        elif params.get('offset') != None and params.get('limit') == None:
+            raise Exception('Missing limit',
+                            'limit and offset are required for paginiation.')
+
+        # Bootstraps the request
         method = method.lower()
 
         headers['X-APP-ID'] = self.APPLICATION_ID
         headers['X-APP-KEY'] = self.API_KEY
 
+        # Executes the request
         if method == "get" or not 'method' in locals():
             r = requests.get(url, params=params, headers=headers)
 
         elif method == "post":
             r = requests.post(url, params=params, data=data, headers=headers)
 
-        # TODO: UPDATE, DELETE methods
-        elif method == "update":
-            pass
-
-        elif method == "delete":
-            pass
-
         else:
             return None
 
+        # Log response content
         logging.debug("Response Content: %s" % (r.text))
 
         return r.json()
@@ -85,22 +91,22 @@ class NutritionixClient:
 
         return self.execute(endpoint, params=params)
 
-    def natural(self, text, **kwargs):
+    def natural(self, q, **kwargs):
         """
         Supports natural language queries like "1 cup butter" or "100cal yogurt"
         """
 
-        # If first arg is String then use it as text
-        if type(text) == str:
-            params = {'q': text}
+        # If first arg is String then use it as query
+        if type(q) == str:
+            params = {'q': q}
 
             # Adds optional args to the params dictionary
             for key, value in kwargs.iteritems():
                 params[key] = value
 
         # If first arg is a dictionary then pass it as request params
-        elif type(text) == dict:
-            params = text
+        elif type(q) == dict:
+            params = q
             if kwargs:
                 raise Exception('Mixing dictionary argument with others arguments',
                                 'You can\'t pass more arguments when using a dictionary as firt argument')
@@ -116,26 +122,27 @@ class NutritionixClient:
 
         return self.execute(endpoint, method="POST", params=params, data=data, headers={'Content-Type': 'text/plain'})
 
-    def search(self, keyword, **kwargs):  # TODO: Add advance search filters
+    def search(self, q, **kwargs):  # TODO: Add advance search filters
         """
         Search for an entire food term like "mcdonalds big mac" or "celery." 
         """
         endpoint = urlparse.urljoin(BASE_URL, 'search')
 
-        # If first arg is String then use it as keyword
-        if type(keyword) == str:
-            params = {'q': keyword}
+        # If first arg is String then use it as query
+        if type(q) == str:
+            params = {'q': q}
 
             # Adds optional args to the params dictionary
             for key, value in kwargs.iteritems():
                 params[key] = value
 
         # If first arg is a dictionary then pass it as request params
-        elif type(keyword) == dict:
-            params = keyword
+        elif type(q) == dict:
+            params = q
             if kwargs:
                 raise Exception('Mixing dictionary argument with others arguments',
                                 'You can\'t pass more arguments when using a dictionary as firt argument')
+
 
         return self.execute(endpoint, params=params)
 
@@ -184,20 +191,20 @@ class NutritionixClient:
         endpoint = urlparse.urljoin(BASE_URL, 'brand/%s' % (params.get('id')))
         return self.execute(endpoint)
 
-    def brand_search(self, keyword, **kwargs):
+    def brand_search(self, q, **kwargs):
         """Look up a specific brand by ID. """
 
-        # If first arg is String then use it as keyword
-        if type(keyword) == str:
-            params = {'q': keyword}
+        # If first arg is String then use it as query
+        if type(q) == str:
+            params = {'q': q}
 
             # Adds optional args to the params dictionary
             for key, value in kwargs.iteritems():
                 params[key] = value
 
         # If first arg is a dictionary then pass it as request params
-        elif type(keyword) == dict:
-            params = keyword
+        elif type(q) == dict:
+            params = q
 
             if kwargs:
                 raise Exception('Mixing dictionary argument with others arguments',
