@@ -18,21 +18,21 @@ class NutritionixClient:
             self.DEBUG = debug
             logging.basicConfig(level=logging.DEBUG)
 
-    def _version(self, *arg):
+    def get_api_version(self, *arg):
         return API_VERSION
 
-    def _application_id(self, *arg):
+    def get_application_id(self, *arg):
         return self.APPLICATION_ID
 
-    def _api_key(self, *arg):
+    def get_api_key(self, *arg):
         return self.API_KEY
 
-    def execute(self, url=None, method='GET', params={}, data={}, headers={}, *arg):
+    def execute(self, url=None, method='GET', params={}, data={}, headers={}):
         """ Bootstrap, execute and return request object,
                 default method: GET
         """
 
-        # Verify params
+        # Verifies params
         if params.get('limit') != None and params.get('offset') == None:
             raise Exception('Missing offset',
                             'limit and offset are required for paginiation.')
@@ -62,54 +62,36 @@ class NutritionixClient:
 
         return r.json()
 
+
     #--------------
     # API Methods #
     #--------------
 
-    def autocomplete(self, description='', **kwargs):
+    def autocomplete(self, **kwargs):
         """
         Specifically designed to provide autocomplete functionality for search
         boxes. The term selected by the user in autocomplete will pass to
         the /search endpoint.
         """
+        
+        # If first arg is String then use it as query
+        params = {}
+        if kwargs:
+            params = kwargs
+
         endpoint = urlparse.urljoin(BASE_URL, 'autocomplete')
-
-        # If first arg is String then use it as description
-        if type(description) == str:
-            params = {'q': description}
-
-            # Adds optional args to the params dictionary
-            for key, value in kwargs.iteritems():
-                params[key] = value
-
-        # If first arg is a dictionary then pass it as request params
-        elif type(description) == dict:
-            params = description
-            if kwargs:
-                raise Exception('Mixing dictionary argument with others arguments',
-                                'You can\'t pass more arguments when using a dictionary as firt argument')
 
         return self.execute(endpoint, params=params)
 
-    def natural(self, q, **kwargs):
+    def natural(self, **kwargs):
         """
         Supports natural language queries like "1 cup butter" or "100cal yogurt"
         """
 
         # If first arg is String then use it as query
-        if type(q) == str:
-            params = {'q': q}
-
-            # Adds optional args to the params dictionary
-            for key, value in kwargs.iteritems():
-                params[key] = value
-
-        # If first arg is a dictionary then pass it as request params
-        elif type(q) == dict:
-            params = q
-            if kwargs:
-                raise Exception('Mixing dictionary argument with others arguments',
-                                'You can\'t pass more arguments when using a dictionary as firt argument')
+        params = {}
+        if kwargs:
+            params = kwargs
 
         # Converts 'q' argument as request data
         data = ''
@@ -122,93 +104,52 @@ class NutritionixClient:
 
         return self.execute(endpoint, method="POST", params=params, data=data, headers={'Content-Type': 'text/plain'})
 
-    def search(self, q, **kwargs):  # TODO: Add advance search filters
+    def search(self, **kwargs):  # TODO: Add advance search filters
         """
         Search for an entire food term like "mcdonalds big mac" or "celery." 
         """
+
+        # Adds keyword args to the params dictionary
+        params = {}
+        if kwargs:
+            params = kwargs
+
         endpoint = urlparse.urljoin(BASE_URL, 'search')
-
-        # If first arg is String then use it as query
-        if type(q) == str:
-            params = {'q': q}
-
-            # Adds optional args to the params dictionary
-            for key, value in kwargs.iteritems():
-                params[key] = value
-
-        # If first arg is a dictionary then pass it as request params
-        elif type(q) == dict:
-            params = q
-            if kwargs:
-                raise Exception('Mixing dictionary argument with others arguments',
-                                'You can\'t pass more arguments when using a dictionary as firt argument')
-
 
         return self.execute(endpoint, params=params)
 
-    def item(self, id, **kwargs):  # TODO: Look up by UPC
+    def item(self, **kwargs):  # TODO: Look up by UPC
         """Look up a specific item by ID or UPC"""
 
-        # If first arg is String then use it as id
-        if type(id) == str:
-            params = {'id': id}
-
-            # Adds optional args to the params dictionary
-            for key, value in kwargs.iteritems():
-                params[key] = value
-
-        # If first arg is a dictionary then pass it as request params
-        elif type(id) == dict:
-            params = id
-
-            if kwargs:
-                raise Exception('Mixing dictionary argument with others arguments',
-                                'You can\'t pass more arguments when using a dictionary as firt argument')
+        # Adds keyword args to the params dictionary
+        params = {}
+        if kwargs:
+            params = kwargs
 
         endpoint = urlparse.urljoin(BASE_URL, 'item/%s' % (params.get('id')))
 
         return self.execute(endpoint)
 
-    def brand(self, id, **kwargs):
+    def brand(self, **kwargs):
         """Look up a specific brand by ID. """
 
-        # If first arg is String then use it as id
-        if type(id) == str:
-            params = {'id': id}
-
-            # Adds optional args to the params dictionary
-            for key, value in kwargs.iteritems():
-                params[key] = value
-
-        # If first arg is a dictionary then pass it as request params
-        elif type(id) == dict:
-            params = id
-
-            if kwargs:
-                raise Exception('Mixing dictionary argument with others arguments',
-                                'You can\'t pass more arguments when using a dictionary as firt argument')
+        # Adds keyword args to the params dictionary
+        params = {}
+        if kwargs:
+            params = kwargs
 
         endpoint = urlparse.urljoin(BASE_URL, 'brand/%s' % (params.get('id')))
+
         return self.execute(endpoint)
 
-    def brand_search(self, q, **kwargs):
+    def brand_search(self, **kwargs):
         """Look up a specific brand by ID. """
 
-        # If first arg is String then use it as query
-        if type(q) == str:
-            params = {'q': q}
-
-            # Adds optional args to the params dictionary
-            for key, value in kwargs.iteritems():
-                params[key] = value
-
-        # If first arg is a dictionary then pass it as request params
-        elif type(q) == dict:
-            params = q
-
-            if kwargs:
-                raise Exception('Mixing dictionary argument with others arguments',
-                                'You can\'t pass more arguments when using a dictionary as firt argument')
+        # Adds keyword args to the params dictionary
+        params = {}
+        if kwargs:
+            params = kwargs
 
         endpoint = urlparse.urljoin(BASE_URL, 'search/brands/')
+
         return self.execute(endpoint, params=params)
