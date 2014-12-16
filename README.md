@@ -1,6 +1,6 @@
 Official Nutritionix Python Client
 ==================================
- 
+### Usage 
 ```py
 # import inside your project
 from nutritionix import NutritionixClient
@@ -12,7 +12,6 @@ nutritionix = NutritionixClient(
 )
 ```
 
-### Usage
 ####  Standard Search
 ```py
 """
