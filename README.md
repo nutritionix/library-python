@@ -19,29 +19,13 @@ nutritionix = NutritionixClient(
 ```
 
 ### Usage
-You can execute all methods in 3 ways.
 ####  Standard Search
 ```py
 """
 This will perform a search. The object passed into this function
 can contain all the perameters the API accepts in the `POST /v2/search` endpoint
 """
-nutritionix.search({
-    'q':'salad',
-    # use these for paging
-    'limit': 10,
-    'offset': 0,
-    # controls the basic nutrient returned in search
-    'search_nutrient': 'calories'
-})
-```
-###### or
-```py
 nutritionix.search(q='salad', limit=10, offset=0, search_nutrient='calories')
-```
-###### also
-```py
-nutritionix.search('salad', limit=10, offset=0, search_nutrient='calories')
 ```
 
 #### Brand Search
@@ -80,4 +64,10 @@ ingredients = """
 1/2 lemon
 """
 nutritionix.natural(q=ingredients, gram_weight=20)
+```
+
+#### Autocomplete
+```py
+#allow users the convenience of "as you type" suggestions.
+nutritionix.autocomplete(q='greek y')
 ```
