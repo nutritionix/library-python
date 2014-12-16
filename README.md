@@ -1,12 +1,6 @@
 Official Nutritionix Python Client
 ==================================
  
-### Installation
-
-```shell
-pip install nutritionix
-```
- 
 ```py
 # import inside your project
 from nutritionix import NutritionixClient
