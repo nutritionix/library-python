@@ -1,6 +1,10 @@
 Official Nutritionix Python Client
 ==================================
-### Usage 
+### Installation
+```shell
+pip install nutritionix-client==1.0.0.dev1
+```
+
 ```py
 # import inside your project
 from nutritionix import NutritionixClient
@@ -11,6 +15,8 @@ nutritionix = NutritionixClient(
     # debug=True, # defaults to False
 )
 ```
+
+### Usage
 
 ####  Standard Search
 ```py
