@@ -5,8 +5,8 @@ from os import path
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the relevant file
-with open(path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
-    long_description = f.read()
+# with open(path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
+#     long_description = f.read()
 
 setup(
     name='nutritionix-client',
@@ -17,7 +17,7 @@ setup(
     version='1.0.0.dev1',
 
     description='Official Nutritionix Python Client',
-    long_description=long_description,
+    # long_description=long_description,
 
     # The project's main homepage.
     url='https://github.com/nutritionix/library-python',
@@ -55,10 +55,16 @@ setup(
         'Programming Language :: Python :: 3.4',
     ],
 
-    # What does your project relate to?
+    # What does this project relate to?
     keywords='nutritionix food nutrition usda',
 
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
-    packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
+    packages=['nutritionix'],
+
+    # List run-time dependencies here. These will be installed by pip when this
+    # project is installed. For an analysis of "install_requires" vs pip's
+    # requirements files see:
+    # https://packaging.python.org/en/latest/technical.html#install-requires-vs-requirements-files
+    install_requires=['requests'],
 )

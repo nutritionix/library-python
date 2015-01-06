@@ -118,7 +118,7 @@ class NutritionixClient:
 
         return self.execute(endpoint, params=params)
 
-    def item(self, **kwargs):  # TODO: Look up by UPC
+    def item(self, **kwargs):
         """Look up a specific item by ID or UPC"""
 
         # Adds keyword args to the params dictionary
