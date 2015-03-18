@@ -7,7 +7,7 @@ pip install nutritionix-client==1.0.0.dev1
 
 ```py
 # import inside your project
-from nutritionix import NutritionixClient
+from nutritionix.nutritionix import NutritionixClient
  
 nutritionix = NutritionixClient(
     application_id='YOUR_APP_ID',
