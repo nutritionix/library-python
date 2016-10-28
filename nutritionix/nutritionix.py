@@ -4,7 +4,7 @@ import requests
 import urlparse
 
 API_VERSION = "v2"
-BASE_URL = "https://apibeta.nutritionix.com/%s/" % (API_VERSION)
+BASE_URL = "https://api.nutritionix.com/%s/" % (API_VERSION)
 
 
 class NutritionixClient:
