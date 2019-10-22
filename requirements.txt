@@ -1,7 +1,7 @@
 argparse==1.2.1
 -e git+https://github.com/nutritionix/library-python.git@3fdc26d7a7291488548ec5e002b5e02e8b207374#egg=nutritionix-dev
 pkginfo==1.1
-requests==2.5.0
+requests==2.20.0
 twine==1.4.0
 wheel==0.24.0
 wsgiref==0.1.2
